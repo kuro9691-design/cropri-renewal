@@ -1,0 +1,41 @@
+# Local secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+secrets*.json
+
+# Generated caches and dependencies
+__pycache__/
+*.py[cod]
+node_modules/
+.venv/
+venv/
+.wrangler/
+build/
+dist/
+*.log
+*cookies*.txt
+
+# Codex and temporary working files
+.codex-attachments/
+.codex-remote-attachments/
+.tmp/
+tmp/
+
+# Archives, backups, and large source media
+*.zip
+homepage-backups/
+assets/
+data/
+
+# Client-confidential source material
+案件資料/
+
+# OS/editor metadata
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

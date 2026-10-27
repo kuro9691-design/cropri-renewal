@@ -1,0 +1,48 @@
+---
+interface Props {
+	eyebrow: string;
+	title: string;
+	lead: string;
+	notice?: string;
+}
+
+const { eyebrow, title, lead, notice } = Astro.props;
+---
+
+<article class="info-page">
+	<header class="info-hero">
+		<p class="info-eyebrow">{eyebrow}</p>
+		<h1>{title}</h1>
+		<p class="info-lead">{lead}</p>
+	</header>
+	{notice && <aside class="info-notice" role="note">{notice}</aside>}
+	<div class="info-content"><slot /></div>
+</article>
+
+<style>
+	.info-page{width:min(100%,960px);margin-inline:auto;color:#26324a}
+	.info-hero{padding:34px 0 42px;border-bottom:1px solid #ccd1da}
+	.info-eyebrow{margin:0 0 12px;color:var(--red);font-size:10px;font-weight:900;letter-spacing:.18em}
+	.info-hero h1{margin:0;color:var(--navy);font-size:clamp(34px,5vw,58px);line-height:1.14;letter-spacing:-.05em}
+	.info-lead{max-width:760px;margin:20px 0 0;color:#4d5870;font-size:15px;line-height:1.95}
+	.info-notice{margin:28px 0 0;padding:18px 20px;border-left:4px solid var(--red);background:#fff5f2;color:#4d2b26;font-size:13px;line-height:1.8}
+	.info-content{padding:42px 0 18px}
+	.info-content :global(section){padding:0 0 38px;margin:0 0 38px;border-bottom:1px solid #d9dde4}
+	.info-content :global(section:last-child){margin-bottom:0;border-bottom:0}
+	.info-content :global(h2){margin:0 0 16px;color:var(--navy);font-size:clamp(22px,3vw,30px);letter-spacing:-.025em}
+	.info-content :global(h3){margin:24px 0 9px;color:var(--navy);font-size:17px}
+	.info-content :global(p),.info-content :global(li){font-size:14px;line-height:1.9}
+	.info-content :global(p){margin:0 0 14px}
+	.info-content :global(ul),.info-content :global(ol){margin:12px 0 0;padding-left:1.35em}
+	.info-content :global(a){color:var(--red);font-weight:800;text-underline-offset:3px}
+	.info-content :global(.info-grid){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+	.info-content :global(.info-card){padding:24px;border:1px solid #ccd1da;background:#fff}
+	.info-content :global(.info-card h2),.info-content :global(.info-card h3){margin-top:0}
+	.info-content :global(.info-kicker){color:var(--red);font-size:10px;font-weight:900;letter-spacing:.14em}
+	.info-content :global(.info-cta){display:inline-block;margin-top:10px;padding:13px 18px;background:var(--red);color:#fff;text-decoration:none;font-size:12px;font-weight:900;letter-spacing:.04em}
+	.info-content :global(details){border-top:1px solid #ccd1da}
+	.info-content :global(details:last-child){border-bottom:1px solid #ccd1da}
+	.info-content :global(summary){cursor:pointer;padding:18px 2px;color:var(--navy);font-weight:900}
+	.info-content :global(details>div){padding:0 2px 20px;color:#4d5870}
+	@media(max-width:720px){.info-hero{padding:24px 0 32px}.info-content{padding-top:32px}.info-content :global(.info-grid){grid-template-columns:1fr}.info-content :global(.info-card){padding:20px}}
+</style>

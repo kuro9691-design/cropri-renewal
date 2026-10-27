@@ -1,0 +1,148 @@
+---
+import { colors } from "../data/colors";
+import estimatorMarkup from "../content/estimator-markup.html?raw";
+import "../styles/product5001.css";
+
+const { data, product, sizes } = Astro.props;
+const colorRegistry = Object.fromEntries(colors);
+---
+
+<article class="product-page cropri-product-selector">
+  <section class="product-hero" aria-labelledby="product-title">
+    <div class="product-media"><img id="main-product-image" src="/cropri/5001-images/view/0002.jpg" alt="5001-01 ブラック 正面" /><p>画像を拡大して見る</p></div>
+    <div class="product-summary">
+      <p class="product-kicker">UNITED ATHLE / 5001-01</p>
+      <h1 id="product-title" {...product.edit.title}>{data.title}</h1>
+      <p class="sku" {...product.edit.sku}>品番 {data.sku}</p>
+      <p class="lede" {...product.edit.summary}>{data.summary}</p>
+      <p class="body-price">無地1枚 <strong>957円〜</strong><small>（税込・カラー/S〜XLの場合）</small></p>
+      <dl class="quick-specs"><div><dt>生地</dt><dd>{data.weight_oz}oz</dd></div><div><dt>サイズ</dt><dd>全{sizes.length}サイズ</dd></div><div><dt>カラー</dt><dd>{data.color_count}色</dd></div></dl>
+      <div class="cps-divider"></div>
+      <div class="cps-head cps-size-head"><h2>サイズ</h2><a href="#size-guide">実寸表を見る ↓</a></div>
+      <div class="cps-sizes" role="group" aria-label="サイズを選ぶ">{sizes.map((size: string) => <button type="button" data-size={size} aria-pressed={size === "M" ? "true" : "false"} class:list={{ "is-selected": size === "M" }}>{size}</button>)}</div>
+      <label class="cps-quantity">数量 <span><input type="number" min="1" max="499" step="1" inputmode="numeric" value="30" data-quantity /> 枚</span></label>
+      <a id="estimate-link" class="cps-cta" href="/estimate?sku=5001-01&color_code=0002&color=ブラック&size=M&qty=30">この内容で見積もる <span aria-hidden="true">→</span></a>
+      <p class="selection-note">色写真からサイズ別在庫を確認できます。表示数は週次更新の参考値です。</p>
+    </div>
+  </section>
+
+  <section class="feature-section content-section" aria-labelledby="feature-title">
+    <div><p class="section-kicker">ABOUT THE BODY / 5001-01</p><h2 id="feature-title">毎日に使いやすい、5.6ozのTシャツ。</h2><p>United Athle 5001-01。無地のままでも、プリントを加えても選びやすい定番ボディです。</p><div class="feature-points"><p><strong>5.6oz</strong><span>ほどよい厚みのボディ</span></p><p><strong>6サイズ</strong><span>S〜XXXLから選択</span></p><p><strong>61色</strong><span>写真から色と参考在庫を確認</span></p></div><p class="subtle">プリント方法や位置は、下の概算見積もり・詳細見積もりで選べます。</p></div>
+    <figure class="model-photo"><img src="/cropri/5001-images/model/A-254.jpg" width="1752" height="2414" loading="lazy" alt="5001-01のホワイトを着用した男性モデル。182cm、Lサイズ。" /><figcaption>着用参考：182cm / Lサイズ / ホワイト（5001-01）</figcaption></figure>
+  </section>
+
+  <section class="colors-section content-section" aria-labelledby="colors-title">
+    <div class="section-heading"><p class="section-kicker">COLOR VARIATION</p><h2 id="colors-title">全61色から選ぶ</h2><p><strong data-color-name>ブラック</strong> <span data-color-code>0002</span>を選択中。色を押すと写真と参考在庫を確認できます。</p></div>
+    <div class="cps-colors color-grid" role="group" aria-label="カラーを選ぶ">{colors.map(([code, name], i) => <button type="button" class:list={["cps-color", { "is-selected": code === "0002", "mobile-more": i >= 8 }]} data-code={code} data-name={name} aria-pressed={code === "0002" ? "true" : "false"} aria-haspopup="dialog" aria-controls="stock-dialog" aria-label={`${name} ${code} の在庫を確認`}><img src={`/cropri/5001-images/thumb/${code}.jpg`} alt="" width="110" height="110" loading="lazy" /><span class="cps-color-name">{name}</span><span class="cps-color-code">{code}</span></button>)}</div>
+    <button id="more-colors" class="color-toggle" type="button" aria-expanded="false">カラーをもっと見る</button><p class="subtle">画面上の色味は実物と異なる場合があります。在庫は注文確定時に改めて確認します。</p>
+  </section>
+
+  <section id="print-quote" class="quote-section" aria-label="5001のプリント概算見積もり">
+    <div class="cq-compact" data-estimate-url="/estimate">
+      <div class="cq-compact-head"><p>PRINT ESTIMATE / 5001-01</p><h2>プリント概算見積もり</h2><p>2項目を選ぶと概算金額が表示され、その条件を引き継いでお問い合わせできます。</p></div>
+      <div class="cq-compact-grid">
+        <div class="cq-compact-questions">
+          <div class="cq-compact-question"><h3><span>01</span> 商品数量</h3><p data-compact-product>5001-01 アダルト / ブラック / M</p><label>希望枚数 <span><input type="number" min="1" max="149" step="1" inputmode="numeric" value="30" placeholder="例：30" data-compact-qty /> 枚</span></label><small>選択中の商品色・サイズを使います。概算表示は1〜149枚。<a href="/estimate" data-compact-large-link>150枚以上はこちら（詳細見積）→</a></small></div>
+          <div class="cq-compact-question"><h3><span>02</span> プリント位置・色数</h3><p>シルクスクリーン印刷・1か所の概算（表面・裏面は通常サイズ）</p><div class="cq-compact-positions" role="group" aria-label="プリント位置"><button type="button" data-compact-pos="front" aria-pressed="true">表面</button><button type="button" data-compact-pos="back" aria-pressed="false">裏面</button><button type="button" data-compact-pos="rsleeve" aria-pressed="false">右そで</button><button type="button" data-compact-pos="lsleeve" aria-pressed="false">左そで</button></div>
+            <div class="cq-compact-preview" data-compact-preview data-pos="front" aria-label="選択中のプリント位置イメージ"><div class="cq-compact-preview-media"><img class="cq-compact-preview-front" src="/cropri/5001-images/view/0002.jpg" width="1000" height="1000" alt="" aria-hidden="true" /><img class="cq-compact-preview-back" src="/cropri/5001-images/back/0002.jpg" width="1000" height="1000" alt="" aria-hidden="true" /><span class="cq-compact-preview-frame" aria-hidden="true"></span></div><div class="cq-compact-preview-copy"><strong data-compact-preview-label aria-live="polite">表面：襟元（首リブ下）から約5cm下が上辺の目安</strong><p>ブラックの参考画像です。点線は配置イメージで、実際の位置・範囲は条件確認後にご案内します。</p></div></div>
+            <div class="cq-compact-colors" role="group" aria-label="プリントの色数"><span>プリント色数</span>{[1,2,3,4,5].map((count) => <button type="button" data-compact-colors={String(count)} aria-pressed={count === 1 ? "true" : "false"}>{count}色</button>)}</div>
+          </div>
+        </div>
+        <div class="cq-compact-result" aria-live="polite"><p>概算合計（税込・送料込み）</p><strong data-compact-total hidden>—</strong><span data-compact-per hidden>1枚あたり —</span><p data-compact-note>希望枚数を入力してください。</p><a href="/estimate" data-compact-link aria-disabled="true">この内容で詳しく見積・問い合わせ →</a><small>無地Tシャツ・1か所の版代とプリント代込み。ほかの地域や複数か所・DTG・DTFは詳細見積で変更できます。</small></div>
+      </div>
+      <div class="cq-compact-engine" hidden aria-hidden="true"><Fragment set:html={estimatorMarkup} /></div>
+    </div>
+  </section>
+
+  <section class="placement-section content-section" aria-labelledby="placement-title">
+    <div class="section-heading"><p class="section-kicker">PRINT PLACEMENT</p><h2 id="placement-title">プリント位置のイメージ</h2><p>写真は無地商品です。点線の枠は配置の説明用で、制作実績ではありません。</p></div>
+    <div class="placement-grid"><figure><div class="placement-photo placement-front"><img src="/cropri/5001-images/view/0002.jpg" alt="ブラックの無地Tシャツ正面" loading="lazy" /><span></span></div><figcaption><strong>表面</strong><span>襟元（首リブ下）から約5cm下が配置上辺の目安</span></figcaption></figure><figure><div class="placement-photo placement-back"><img src="/cropri/5001-images/back/0002.jpg" alt="ブラックの無地Tシャツ背面" loading="lazy" /><span></span></div><figcaption><strong>裏面</strong><span>背中の縦長の配置イメージ</span></figcaption></figure></div>
+  </section>
+
+  <section class="flow-section content-section" aria-labelledby="flow-title"><p class="section-kicker">HOW TO ORDER</p><h2 id="flow-title">ご注文までの流れ</h2><ol><li><span>01</span><strong>条件を選んで概算</strong><p>色・サイズ・枚数とプリント条件を選び、金額の目安を確認。</p></li><li><span>02</span><strong>詳細見積もり・相談</strong><p>概算の条件を引き継いで、デザインや希望納期をご相談ください。</p></li><li><span>03</span><strong>仕様と金額を確認</strong><p>データ・在庫・加工内容を確認し、正式な内容をご案内します。</p></li><li><span>04</span><strong>確定後に制作・発送</strong><p>内容確定後に制作を進めます。時期は条件確認後にご案内します。</p></li></ol></section>
+
+  <section class="information-section content-section" aria-labelledby="information-title">
+    <div class="section-heading"><p class="section-kicker">PRODUCT INFORMATION</p><h2 id="information-title">商品情報</h2></div>
+    <details open><summary>商品仕様・詳細</summary><div><p>ほどよい厚みで、1枚でも重ね着でも使いやすい定番Tシャツです。</p><dl class="detail-list"><div><dt>品番</dt><dd>5001-01</dd></div><div><dt>生地</dt><dd>5.6oz</dd></div><div><dt>サイズ</dt><dd>S / M / L / XL / XXL / XXXL</dd></div><div><dt>カラー</dt><dd>全61色</dd></div></dl></div></details>
+    <details><summary>ホワイト・カラー別の本体価格</summary><div class="table-wrap"><table><caption>無地1枚（税込）</caption><thead><tr><th>サイズ</th><th>ホワイト</th><th>カラー</th></tr></thead><tbody><tr><th>S〜XL</th><td>880円</td><td>957円</td></tr><tr><th>XXL</th><td>1,100円</td><td>1,298円</td></tr><tr><th>XXXL</th><td>1,320円</td><td>1,463円</td></tr></tbody></table></div></details>
+    <details><summary>同シリーズのサイズ展開</summary><div><p>このページはアダルト（S〜XXXL）です。キッズやガールズは、詳細見積もり・お問い合わせからご相談ください。</p></div></details>
+    <details><summary>プリント・入稿について</summary><div><p>シルクスクリーン、DTG（インクジェット）、DTF（フルカラー転写）に対応します。デザインと枚数を確認して適した方法をご案内します。</p></div></details>
+    <details><summary>ご注文・納期について</summary><div><p>表示価格と在庫は目安です。デザイン、在庫、加工内容、納期を確認後に正式なお見積もりをご案内します。</p></div></details>
+  </section>
+
+  <section id="size-guide" class="size-section content-section" aria-labelledby="size-title"><p class="section-kicker">SIZE GUIDE</p><h2 id="size-title">サイズ実寸表</h2><div class="table-wrap"><table><thead><tr><th>サイズ</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th><th>XXXL</th></tr></thead><tbody><tr><th>身丈</th><td>65</td><td>69</td><td>73</td><td>77</td><td>81</td><td>84</td></tr><tr><th>身幅</th><td>49</td><td>52</td><td>55</td><td>58</td><td>63</td><td>68</td></tr><tr><th>肩幅</th><td>42</td><td>46</td><td>50</td><td>54</td><td>57</td><td>60</td></tr><tr><th>袖丈</th><td>19</td><td>20</td><td>22</td><td>24</td><td>25</td><td>26</td></tr></tbody></table></div><p class="subtle">単位：cm。商品には個体差があります。</p></section>
+</article>
+
+<dialog id="stock-dialog">
+  <button id="close-stock" aria-label="在庫表を閉じる">×</button>
+  <div class="stock-dialog-grid">
+    <div class="stock-dialog-media"><img id="stock-image" src="/cropri/5001-images/view/0002.jpg" alt="5001-01 ブラック" /></div>
+    <div class="stock-dialog-content">
+      <p class="section-kicker">5001-01 / COLOR STOCK</p>
+      <h2 id="stock-title"><span id="stock-code">0002</span><strong id="stock-name">ブラック</strong></h2>
+      <div class="stock-dialog-nav"><button id="stock-prev" type="button">← 前の色</button><button id="stock-next" type="button">次の色 →</button></div>
+      <p class="stock-instruction">サイズを選ぶと、ページ上部と見積もりにも反映されます。</p>
+      <table class="stock-table"><thead><tr><th>サイズ</th><th>参考在庫</th></tr></thead><tbody id="stock-list"></tbody></table>
+      <label class="stock-quantity">見積もり希望枚数 <span><input id="stock-qty" type="number" min="1" max="499" step="1" inputmode="numeric" value="30" /> 枚</span></label>
+      <a id="stock-estimate" class="stock-estimate" href="/estimate">この色・サイズで見積もる →</a>
+      <p class="stock-note">CSV作成日時：<span id="stock-date"></span><br />在庫データは週次更新です。リアルタイム在庫ではなく、現在の在庫・確保を保証しません。</p>
+    </div>
+  </div>
+</dialog>
+
+<link rel="stylesheet" href="/cropri/estimator.css" />
+<link rel="stylesheet" href="/cropri/compact-estimator.css" />
+<script is:inline define:vars={{ colorRegistry }}>window.CROPRI_5001_COLORS = colorRegistry;</script>
+<script is:inline>window.CROPRI_ESTIMATOR = {};</script>
+<script is:inline src="/cropri/estimator.js"></script>
+<script>
+  const selector = document.querySelector<HTMLElement>(".cropri-product-selector")!;
+  const dialog = document.querySelector<HTMLDialogElement>("#stock-dialog")!;
+  const colorsSection = document.querySelector<HTMLElement>(".colors-section")!;
+  const colorButtons = Array.from(document.querySelectorAll<HTMLButtonElement>(".cps-color"));
+  let stockData: any = null, selectedCode = "0002", selectedName = "ブラック", activeColorIndex = 1;
+  let stockTrigger: HTMLButtonElement | null = null;
+  const currentSize = () => document.querySelector<HTMLButtonElement>(".cps-sizes .is-selected")?.dataset.size || "M";
+  const currentQty = () => document.querySelector<HTMLInputElement>("[data-quantity]")?.value || "30";
+  function updateSelection() {
+    const url = new URL("/estimate", window.location.href);
+    url.searchParams.set("sku", "5001-01"); url.searchParams.set("color_code", selectedCode); url.searchParams.set("color", selectedName); url.searchParams.set("size", currentSize()); url.searchParams.set("qty", currentQty());
+    document.querySelector<HTMLAnchorElement>("#estimate-link")!.href = url.href;
+    document.querySelectorAll<HTMLElement>("[data-color-name]").forEach((el) => el.textContent = selectedName); document.querySelectorAll<HTMLElement>("[data-color-code]").forEach((el) => el.textContent = selectedCode);
+    selector.dispatchEvent(new CustomEvent("cropri:selection-change", { bubbles: true }));
+    syncStockEstimate();
+  }
+  function syncStockEstimate() {
+    const link = document.querySelector<HTMLAnchorElement>("#stock-estimate");
+    if (!link) return;
+    const url = new URL("/estimate", window.location.href);
+    url.searchParams.set("sku", "5001-01"); url.searchParams.set("color_code", selectedCode); url.searchParams.set("color", selectedName); url.searchParams.set("size", currentSize()); url.searchParams.set("qty", document.querySelector<HTMLInputElement>("#stock-qty")?.value || currentQty());
+    link.href = url.href;
+  }
+  async function showStock(index: number, trigger?: HTMLButtonElement) {
+    activeColorIndex = (index + colorButtons.length) % colorButtons.length;
+    const button = colorButtons[activeColorIndex];
+    stockTrigger = trigger || stockTrigger || button;
+    selectedCode = button.dataset.code!; selectedName = button.dataset.name!;
+    colorButtons.forEach((other) => { other.classList.toggle("is-selected", other === button); other.setAttribute("aria-pressed", other === button ? "true" : "false"); });
+    const mainImage = document.querySelector<HTMLImageElement>("#main-product-image")!; mainImage.src = `/cropri/5001-images/view/${selectedCode}.jpg`; mainImage.alt = `5001-01 ${selectedName} 正面`;
+    const stockImage = document.querySelector<HTMLImageElement>("#stock-image")!; stockImage.src = `/cropri/5001-images/view/${selectedCode}.jpg`; stockImage.alt = `5001-01 ${selectedName}`;
+    document.querySelector<HTMLElement>("#stock-code")!.textContent = selectedCode; document.querySelector<HTMLElement>("#stock-name")!.textContent = selectedName;
+    stockData ||= await fetch("/cropri/stock-5001.json").then((response) => response.json());
+    const rows = Object.entries(stockData.stock[selectedCode] || {});
+    document.querySelector<HTMLElement>("#stock-list")!.innerHTML = rows.map(([size, count]) => `<tr><th><button type="button" data-stock-size="${size}" class="${size === currentSize() ? "is-selected" : ""}">${size}</button></th><td>${Number(count).toLocaleString()}枚</td></tr>`).join("");
+    document.querySelector<HTMLElement>("#stock-date")!.textContent = stockData.source_created_at;
+    document.querySelectorAll<HTMLButtonElement>("[data-stock-size]").forEach((sizeButton) => sizeButton.addEventListener("click", () => { document.querySelector<HTMLButtonElement>(`.cps-sizes button[data-size="${sizeButton.dataset.stockSize}"]`)?.click(); document.querySelectorAll<HTMLButtonElement>("[data-stock-size]").forEach((other) => other.classList.toggle("is-selected", other === sizeButton)); }));
+    updateSelection();
+    if (!dialog.open) dialog.showModal();
+  }
+  document.querySelectorAll<HTMLButtonElement>(".cps-sizes button").forEach((button) => button.addEventListener("click", () => { document.querySelectorAll<HTMLButtonElement>(".cps-sizes button").forEach((other) => { other.classList.toggle("is-selected", other === button); other.setAttribute("aria-pressed", other === button ? "true" : "false"); }); updateSelection(); }));
+  colorButtons.forEach((button, index) => button.addEventListener("click", () => showStock(index, button)));
+  document.querySelector("#stock-prev")?.addEventListener("click", () => showStock(activeColorIndex - 1)); document.querySelector("#stock-next")?.addEventListener("click", () => showStock(activeColorIndex + 1));
+  document.querySelector("#close-stock")?.addEventListener("click", () => dialog.close()); dialog.addEventListener("close", () => stockTrigger?.focus());
+  document.querySelector<HTMLInputElement>("#stock-qty")?.addEventListener("input", (event) => { const topQty = document.querySelector<HTMLInputElement>("[data-quantity]")!; topQty.value = (event.currentTarget as HTMLInputElement).value; topQty.dispatchEvent(new Event("input", { bubbles: true })); syncStockEstimate(); });
+  document.querySelector<HTMLInputElement>("[data-quantity]")?.addEventListener("input", (event) => { const stockQty = document.querySelector<HTMLInputElement>("#stock-qty"); if (stockQty) stockQty.value = (event.currentTarget as HTMLInputElement).value; updateSelection(); });
+  document.querySelector("#more-colors")?.addEventListener("click", (event) => { colorsSection.classList.toggle("expanded"); const button = event.currentTarget as HTMLButtonElement, expanded = colorsSection.classList.contains("expanded"); button.textContent = expanded ? "閉じる" : "カラーをもっと見る"; button.setAttribute("aria-expanded", String(expanded)); });
+  updateSelection();
+</script>
+<script is:inline src="/cropri/compact-estimator.js"></script>

@@ -1,0 +1,11 @@
+---
+import Base from "../layouts/Base.astro";
+import { Form } from "@emdash-cms/plugin-forms/ui";
+import "../styles/forms.css";
+---
+<Base title="お問い合わせ">
+  <p class="status">PRIVATE STORAGE TEST</p>
+  <h1>お問い合わせ</h1>
+  <p class="lede">この検証では外部メールを送らず、EmDashのローカルDBにだけ保存します。</p>
+  <section class="card"><Form id="cropri-inquiry" /></section>
+</Base>

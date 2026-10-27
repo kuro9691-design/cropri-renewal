@@ -1,0 +1,52 @@
+---
+import { getEmDashEntry, getSeoMeta, decodeSlug, getSiteSettings } from "emdash";
+import { PortableText } from "emdash/ui";
+import Base from "../layouts/Base.astro";
+import { resolveStarterSiteIdentity } from "../utils/site-identity";
+
+const rawSlug = Astro.params.slug;
+const slug = decodeSlug(rawSlug);
+
+if (!slug) {
+	return Astro.rewrite("/404");
+}
+
+let { entry: page, cacheHint } = await getEmDashEntry("pages", slug);
+
+// The WordPress WXR importer preserves percent-encoded Japanese post_name
+// values. Prefer EmDash's decoded-slug lookup, then fall back to the stored
+// WordPress value until slugs are normalized during the migration cutover.
+if (!page) {
+	const wordpressSlug = encodeURIComponent(slug).toLowerCase();
+	if (wordpressSlug !== slug) {
+		({ entry: page, cacheHint } = await getEmDashEntry("pages", wordpressSlug));
+	}
+}
+
+if (!page) {
+	return Astro.rewrite("/404");
+}
+
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+const { siteTitle } = resolveStarterSiteIdentity(await getSiteSettings());
+
+const seo = getSeoMeta(page, {
+	siteTitle,
+	siteUrl: Astro.url.origin,
+	path: Astro.url.pathname.replace(/\/$/, ""),
+});
+---
+
+<Base
+	title={seo.title}
+	pageTitle={seo.ogTitle}
+	description={seo.description}
+	canonical={seo.canonical}
+	content={{ collection: "pages", id: page.data.id, slug }}
+>
+	<article>
+		<h1 {...page.edit.title}>{page.data.title}</h1>
+
+		<PortableText value={page.data.content} />
+	</article>
+</Base>

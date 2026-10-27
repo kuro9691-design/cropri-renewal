@@ -1,0 +1,27 @@
+<footer class="site-footer">
+	<div class="footer-brand">
+		<strong>CROPRI</strong>
+		<span>グラフィックで、毎日をちょっとたのしく。</span>
+	</div>
+	<nav aria-label="フッターメニュー">
+		<a href="/products/5001">T-SHIRTS</a>
+		<a href="/#categories">GOODS</a>
+		<a href="/print-methods">PRINT</a>
+		<a href="/works">WORKS</a>
+		<a href="/faq">FAQ</a>
+		<a href="/contact">お問い合わせ</a>
+	</nav>
+	<nav class="footer-legal" aria-label="サイト情報">
+		<a href="/about">CROPRIについて</a>
+		<a href="/returns">キャンセル・再製作</a>
+		<a href="/privacy-policy">プライバシー</a>
+	</nav>
+</footer>
+
+<style>
+	.site-footer{display:grid;grid-template-columns:minmax(220px,1fr) auto;gap:20px 34px;padding:30px max(24px,calc((100vw - 1320px)/2));border-top:1px solid #d9dde4;color:var(--navy);background:#fff}
+	.footer-brand{display:flex;align-items:center;gap:18px}.footer-brand strong{font-size:26px;letter-spacing:-.05em}.footer-brand span{font-size:9px;color:#687189}
+	.site-footer nav{display:flex;align-items:center;justify-content:flex-end;gap:16px;overflow-x:auto}.site-footer a{color:var(--navy);font-size:9px;font-weight:800;text-decoration:none;white-space:nowrap}.site-footer a:hover,.site-footer a:focus-visible{text-decoration:underline;text-underline-offset:5px}
+	.footer-legal{grid-column:1/-1;padding-top:16px;border-top:1px solid #eceef2}
+	@media(max-width:720px){.site-footer{grid-template-columns:1fr;padding:24px 16px}.footer-brand{justify-content:space-between}.site-footer nav{justify-content:flex-start}.footer-legal{grid-column:1}}
+</style>

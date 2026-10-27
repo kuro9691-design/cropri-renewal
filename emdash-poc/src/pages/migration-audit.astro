@@ -1,0 +1,27 @@
+---
+import { getEmDashCollection } from "emdash";
+import Base from "../layouts/Base.astro";
+const { entries: pages, cacheHint } = await getEmDashCollection("pages", { limit: 100, orderBy: { created_at: "asc" } });
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+const rows = pages.map((page:any) => {
+  const serialized = JSON.stringify(page.data.content ?? []);
+  return {
+    slug: page.id,
+    title: page.data.title,
+    status: page.data.status,
+    blocks: Array.isArray(page.data.content) ? page.data.content.length : 0,
+    chars: serialized.length,
+    htmlBlocks: (serialized.match(/html/gi) ?? []).length,
+    elementorRefs: (serialized.match(/elementor/gi) ?? []).length,
+    shortcodes: (serialized.match(/\[[a-zA-Z_][^\]]*\]/g) ?? []).length,
+    images: serialized.split("https://cropri.com/wp-content/uploads").length - 1,
+  };
+});
+---
+<Base title="WordPress Import Audit">
+  <p class="status">LOCAL MIGRATION AUDIT</p>
+  <h1>WordPress固定ページの取込結果</h1>
+  <p>{rows.length}件。画像はまだコピーせず、元URL参照の状態で構造を確認しています。</p>
+  <div class="card table-wrap"><table><thead><tr><th>タイトル</th><th>slug</th><th>状態</th><th>blocks</th><th>文字</th><th>HTML</th><th>Elementor</th><th>shortcode</th><th>画像URL</th></tr></thead><tbody>{rows.map(row=><tr><td><a href={`/${row.slug}`}>{row.title}</a></td><td>{row.slug}</td><td>{row.status}</td><td>{row.blocks}</td><td>{row.chars}</td><td>{row.htmlBlocks}</td><td>{row.elementorRefs}</td><td>{row.shortcodes}</td><td>{row.images}</td></tr>)}</tbody></table></div>
+</Base>
+<style>.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:.85rem}th,td{border-bottom:1px solid #ddd;text-align:left;padding:8px;white-space:nowrap}th{background:var(--ink);color:white}td:nth-child(2){max-width:240px;overflow:hidden;text-overflow:ellipsis}</style>

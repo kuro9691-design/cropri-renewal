@@ -1,0 +1,22 @@
+{
+  "name": "CROPRI お問い合わせ",
+  "slug": "cropri-inquiry",
+  "pages": [{
+    "title": "お問い合わせ内容",
+    "fields": [
+      { "id": "name", "type": "text", "label": "お名前", "name": "name", "required": true, "width": "half" },
+      { "id": "email", "type": "email", "label": "メールアドレス", "name": "email", "required": true, "width": "half" },
+      { "id": "subject", "type": "text", "label": "件名", "name": "subject", "required": true, "width": "full" },
+      { "id": "message", "type": "textarea", "label": "お問い合わせ内容", "name": "message", "required": true, "width": "full" }
+    ]
+  }],
+  "settings": {
+    "confirmationMessage": "お問い合わせを受け付けました（ローカル検証）。",
+    "notifyEmails": [],
+    "digestEnabled": false,
+    "digestHour": 9,
+    "retentionDays": 0,
+    "spamProtection": "honeypot",
+    "submitLabel": "送信する"
+  }
+}

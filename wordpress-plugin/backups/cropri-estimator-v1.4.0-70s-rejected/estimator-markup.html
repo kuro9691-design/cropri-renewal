@@ -1,0 +1,115 @@
+<div class="cq">
+  <header class="cq-head">
+    <div class="cq-head-in">
+      <div class="cq-eyebrow">CROPRI ATHLETIC PRINT DEPT. ／ 5001</div>
+      <h1 class="cq-title">5.6オンス ハイクオリティーTシャツ<br><span>概算見積もり</span></h1>
+      <ul class="cq-specs">
+        <li>United Athle 5001</li><li>綿100%</li><li>5001-01 アダルト S〜XXXL</li><li>5001-02 キッズ 90〜160</li><li>5001-03 ガールズ G-M・G-L</li><li>シルクスクリーン／DTG／DTF</li>
+      </ul>
+      <p class="cq-proto">試作版です。シルクスクリーン・DTG（インクジェット）・DTF（フルカラー転写）から選べます。Tシャツ代・デザインデータ作成・プリント代込みの価格です。</p>
+    </div>
+  </header>
+
+  <div class="cq-grid">
+    <div class="cq-main">
+
+      <section class="cq-step" aria-labelledby="s1">
+        <div class="cq-step-h"><span class="cq-step-n">1</span><h2 id="s1">カラーとサイズ別の枚数</h2><p>色ごとに行を追加できます</p></div>
+        <div id="cq-rows" class="cq-step" style="margin:0;gap:12px"></div>
+        <button type="button" class="cq-add" id="cq-add">＋ 別のカラーを追加</button>
+      </section>
+
+      <section class="cq-step" aria-labelledby="s2">
+        <div class="cq-step-h"><span class="cq-step-n">2</span><h2 id="s2">プリント方法</h2><p>デザインと枚数に合わせて選べます</p></div>
+        <div class="cq-methods" id="cq-methods" role="group" aria-label="プリント方法"></div>
+      </section>
+
+      <section class="cq-step" aria-labelledby="s3">
+        <div class="cq-step-h"><span class="cq-step-n">3</span><h2 id="s3">プリント位置・大きさ<span id="cq-pos-h-colors">・色数</span></h2><p id="cq-pos-hint">2色目・2か所目から「1色追加」の料金</p></div>
+        <div class="cq-pos-wrap" id="cq-pos"></div>
+        <p class="cq-note" id="cq-pos-note"></p>
+      </section>
+
+      <section class="cq-step" aria-labelledby="s4">
+        <div class="cq-step-h"><span class="cq-step-n">4</span><h2 id="s4">デザインとオプション</h2></div>
+        <div class="cq-free"><b>デザインデータ作成と修正2回までは料金に含まれています</b><span>手書きのラフや画像からでもデータにします。イメージが決まらない場合は3案まで比較案をお出しします。3回目以降の修正や、作り込みが必要なデザインは別途お見積もりします。</span></div>
+        <div class="cq-row" style="gap:12px">
+          <label class="cq-check"><input type="checkbox" id="cq-data"> Illustratorのアウトライン化データ（完全データ）で入稿する（<span id="cq-data-p"></span>円引き）</label>
+          <label class="cq-check"><input type="checkbox" id="cq-repeat"> 追加注文（同じデザインを再注文）</label>
+          <label class="cq-check"><input type="checkbox" id="cq-pack"> 1枚ずつたたんで袋詰め（1枚 <span id="cq-pack-p"></span>円）</label>
+          <label class="cq-field" style="max-width:340px">お届け先の地域
+            <select id="cq-region"></select>
+          </label>
+        </div>
+      </section>
+
+      <section class="cq-step" aria-labelledby="s5" id="cq-curve-sec">
+        <div class="cq-step-h"><h2 id="s5">枚数と1枚あたりの価格</h2><p id="cq-curve-note">今のプリント位置で、1〜100枚を比べた価格</p></div>
+        <div class="cq-curve" id="cq-curve">
+          <div class="cq-cc" role="group" aria-label="グラフの絵の大きさ"><span>絵の大きさ</span><span id="cq-sz-btns"></span></div>
+          <div class="cq-cc" role="group" aria-label="グラフのシルクの色数"><span>シルクの色数</span><span id="cq-cc-btns"></span><small>（グラフだけ切り替わります）</small></div>
+          <ul class="cq-legend" id="cq-legend"></ul>
+          <svg id="cq-curve-svg" viewBox="0 0 640 280" role="img" aria-labelledby="s5"></svg>
+          <div class="cq-slide"><label for="cq-curve-n">枚数を動かす</label><input type="range" id="cq-curve-n" min="0" max="1000" step="1" value="500" aria-valuetext="10枚"><output id="cq-curve-out" for="cq-curve-n">10枚</output><button type="button" id="cq-curve-back">今の枚数へ</button></div>
+        </div>
+        <p class="cq-note">1枚あたり＝（合計−送料）÷枚数。Tシャツ代・デザインデータ作成・プリント代・少量手数料込み、税込。縦軸・横軸とも目盛りは等倍ではありません（対数目盛）。グラフ上でカーソル（スマホは指）を動かすか、スライダーを動かすと、その枚数での価格が上に出ます。</p>
+      </section>
+
+      <details class="cq-ref" id="cq-ref">
+        <summary>料金表を見る</summary>
+        <div class="cq-tablewrap" id="cq-reftables"></div>
+      </details>
+    </div>
+
+    <aside class="cq-panel" aria-live="polite">
+      <h2>概算お見積もり</h2>
+      <div class="cq-band" id="cq-band">—</div>
+      <div class="cq-unit" id="cq-unit"></div>
+      <div class="cq-bd" id="cq-bd" hidden>
+        <table>
+          <caption>明細（税別）</caption>
+          <tbody id="cq-bd-body"></tbody>
+          <tfoot>
+            <tr><th scope="row">小計（税別）</th><td id="cq-bd-sub">0円</td></tr>
+            <tr><th scope="row">消費税（10%）</th><td id="cq-bd-tax">0円</td></tr>
+          </tfoot>
+        </table>
+      </div>
+      <dl class="cq-lines" id="cq-lines">
+        <div><dt>商品・プリント代<span class="cq-detail" id="cq-goods-d"></span></dt><dd id="cq-goods">0円</dd></div>
+        <div id="cq-small-line" hidden><dt><span id="cq-small-t">小ロット料金</span><span class="cq-detail" id="cq-small-d">10枚に満たない分</span></dt><dd id="cq-small">0円</dd></div>
+        <div id="cq-xl-line" hidden><dt>特大版の版代<span class="cq-detail" id="cq-xl-d"></span></dt><dd id="cq-xl">0円</dd></div>
+        <div id="cq-data-line" hidden><dt>完全データ入稿割引</dt><dd id="cq-datav">0円</dd></div>
+        <div id="cq-pack-line" hidden><dt>袋詰め</dt><dd id="cq-packv">0円</dd></div>
+        <div><dt>送料<span class="cq-detail" id="cq-ship-d"></span></dt><dd id="cq-ship">—</dd></div>
+      </dl>
+      <div class="cq-total">
+        <span class="lbl">合計（税込）</span>
+        <span class="big" id="cq-total">0<small>円</small></span>
+        <span class="per" id="cq-per">1枚あたり —</span>
+        <span class="per" id="cq-taxnote"></span>
+      </div>
+      <div class="cq-compare" id="cq-compare"></div>
+      <div class="cq-alert" id="cq-alert" hidden></div>
+
+      <button type="button" class="cq-cta" id="cq-cta">この内容で見積もりを依頼する</button>
+      <form class="cq-form" id="cq-form" hidden>
+        <p class="cq-form-h">ご連絡先</p>
+        <p class="cq-form-total">この内容 <b id="cq-form-total">—</b></p>
+        <label><span>お名前 <span class="req">必須</span></span><input type="text" name="name" required maxlength="100" autocomplete="name"></label>
+        <label><span>メールアドレス <span class="req">必須</span></span><input type="email" name="email" required maxlength="200" autocomplete="email"></label>
+        <label><span>電話番号</span><input type="tel" name="tel" maxlength="30" autocomplete="tel"></label>
+        <label><span>ご希望の納期・デザインのご相談など</span><textarea name="message" rows="4" maxlength="2000"></textarea></label>
+        <input type="text" name="website" class="cq-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="cq-fine">入力いただいた内容は、お見積もりとご連絡のためだけに使います。サイト上には公開しません。</p>
+        <button type="submit" class="cq-cta">見積もりを依頼する</button>
+        <p class="cq-form-msg" id="cq-form-msg" role="status"></p>
+      </form>
+      <div class="cq-done" id="cq-done" hidden role="status">
+        <b>ご依頼を受け付けました。</b>
+        <p>デザインと内容を確認して、正式なお見積書をメールでお送りします。</p>
+      </div>
+      <p class="cq-fine">Tシャツ代・デザインデータ作成（修正2回まで）・版代・プリント代を含む概算です。シルクの明細は正式なお見積書（税別）と同じ形です。正式なお見積もりは、デザインを確認してからお送りします。</p>
+    </aside>
+  </div>
+</div>

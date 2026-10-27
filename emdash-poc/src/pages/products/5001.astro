@@ -1,0 +1,16 @@
+---
+import { getEmDashEntry } from "emdash";
+import Base from "../../layouts/Base.astro";
+import Product5001 from "../../components/Product5001.astro";
+
+const slug = "5001";
+const { entry: product, cacheHint } = await getEmDashEntry("products", slug);
+if (!product) return Astro.rewrite("/404");
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+const data = product.data as any;
+const sizes = Array.isArray(data.sizes) ? data.sizes : ["S", "M", "L", "XL", "XXL", "XXXL"];
+---
+
+<Base title={data.title} content={{ collection: "products", id: data.id, slug }}>
+  <Product5001 data={data} product={product} sizes={sizes} />
+</Base>

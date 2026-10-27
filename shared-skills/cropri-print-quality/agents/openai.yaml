@@ -1,0 +1,7 @@
+interface:
+  display_name: "CROPRI 印刷品質確認"
+  short_description: "内製・外注の文字抜けをAIと人で防止する品質確認手順"
+  default_prompt: "Use $cropri-print-quality to audit this production file before plate-making or submission."
+
+policy:
+  allow_implicit_invocation: true

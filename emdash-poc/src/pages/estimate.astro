@@ -1,0 +1,13 @@
+---
+import Base from "../layouts/Base.astro";
+import estimatorMarkup from "../content/estimator-markup.html?raw";
+import { colors } from "../data/colors";
+const colorRegistry = Object.fromEntries(colors);
+---
+<Base title="概算見積もり">
+  <Fragment set:html={estimatorMarkup} />
+</Base>
+<link rel="stylesheet" href="/cropri/estimator.css" />
+<script is:inline define:vars={{ colorRegistry }}>window.CROPRI_5001_COLORS = colorRegistry;</script>
+<script is:inline>window.CROPRI_ESTIMATOR = {};</script>
+<script is:inline src="/cropri/estimator.js"></script>

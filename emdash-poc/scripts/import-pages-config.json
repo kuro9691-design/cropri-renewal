@@ -1,0 +1,14 @@
+{
+  "postTypeMappings": {
+    "page": { "collection": "pages", "enabled": true },
+    "post": { "collection": "posts", "enabled": false },
+    "elementor_library": { "collection": "elementor_library", "enabled": false },
+    "forminator_forms": { "collection": "forminator_forms", "enabled": false },
+    "cropri_quote_req": { "collection": "cropri_quote_req", "enabled": false },
+    "tablepress_table": { "collection": "tablepress_table", "enabled": false }
+  },
+  "skipExisting": true,
+  "importSections": false,
+  "authorMappings": { "phc26993": null },
+  "locale": "ja"
+}

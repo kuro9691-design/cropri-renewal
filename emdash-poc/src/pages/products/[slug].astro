@@ -1,0 +1,43 @@
+---
+import { getEmDashEntry } from "emdash";
+import Base from "../../layouts/Base.astro";
+import { colors } from "../../data/colors";
+const { slug } = Astro.params;
+if (!slug) return Astro.rewrite("/404");
+const { entry: product, cacheHint } = await getEmDashEntry("products", slug);
+if (!product) return Astro.rewrite("/404");
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+const data = product.data as any;
+const sizes = Array.isArray(data.sizes) ? data.sizes : [];
+---
+<Base title={data.title} content={{collection:"products", id:data.id, slug}}>
+  <article class="product">
+    <div class="hero card">
+      <div><img id="main-product-image" src="/cropri/5001-images/view/0001.jpg" alt="5001 ホワイト" /></div>
+      <div>
+        <p class="status">CMS PRODUCT</p>
+        <h1 {...product.edit.title}>{data.title}</h1>
+        <p class="sku" {...product.edit.sku}>品番 {data.sku}</p>
+        <p class="lede" {...product.edit.summary}>{data.summary}</p>
+        <dl><div><dt>生地</dt><dd>{data.weight_oz}oz</dd></div><div><dt>サイズ</dt><dd>{sizes.join(" / ")}</dd></div><div><dt>カラー</dt><dd>{data.color_count}色</dd></div></dl>
+        <div class="controls"><label>サイズ<select id="selected-size">{sizes.map((s:string)=><option>{s}</option>)}</select></label><label>数量<input id="selected-qty" type="number" min="1" max="499" value="30" /></label></div>
+        <a id="estimate-link" class="button" href="/estimate?sku=5001-01&color=0001&size=S&qty=30">この条件で見積もる</a>
+      </div>
+    </div>
+    <section class="colors card"><h2>全61色から選ぶ</h2><p>色を押すと写真と参考在庫を確認できます。在庫は週次更新で、注文確定時の数量を保証するものではありません。</p>
+      <div class="color-grid">{colors.map(([code,name],i)=><button class:list={["color", i>=8&&"mobile-more"]} data-code={code} data-name={name}><img src={`/cropri/5001-images/thumb/${code}.jpg`} alt="" loading="lazy" /><span>{name}</span><small>{code}</small></button>)}</div>
+      <button id="more-colors" class="more" type="button">カラーをもっと見る</button>
+    </section>
+  </article>
+  <dialog id="stock-dialog"><button id="close-stock" aria-label="閉じる">×</button><h2 id="stock-title"></h2><div id="stock-list"></div><p>在庫データ更新: <span id="stock-date"></span>（週次）</p></dialog>
+</Base>
+<style>
+.hero{display:grid;grid-template-columns:minmax(280px,1fr) 1fr;gap:38px}.hero img{width:100%;max-height:620px;object-fit:contain}.sku{letter-spacing:.12em;color:#666}.hero dl{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.hero dl div{border-top:2px solid var(--ink);padding-top:10px}.hero dt{font-size:.8rem;color:#666}.hero dd{margin:4px 0;font-weight:800}.controls{display:flex;gap:12px;margin:22px 0}.controls label{display:grid;gap:5px;font-weight:700}.controls select,.controls input{font:inherit;padding:9px;width:120px}.colors{margin-top:30px}.color-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:12px}.color{background:white;border:1px solid #ddd;padding:7px;cursor:pointer;min-width:0}.color.selected{outline:3px solid var(--red)}.color img{width:100%;aspect-ratio:1;object-fit:contain}.color span,.color small{display:block;overflow:hidden;text-overflow:ellipsis}.color span{font-size:.75rem;font-weight:700;white-space:nowrap}.more{display:none;margin:18px auto 0;padding:10px 16px}dialog{max-width:520px;width:calc(100% - 32px);border:0;border-top:7px solid var(--red);padding:26px}dialog::backdrop{background:#18273bcc}#close-stock{float:right;border:0;background:none;font-size:2rem}#stock-list{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}#stock-list div{background:#eee;padding:10px;text-align:center}
+@media(max-width:720px){.hero{grid-template-columns:1fr}.color-grid{grid-template-columns:repeat(4,1fr)}.mobile-more{display:none}.colors.expanded .mobile-more{display:block}.more{display:block}.hero dl{grid-template-columns:1fr 1fr 1fr}}
+</style>
+<script>
+let stockData:any=null;const dialog=document.querySelector<HTMLDialogElement>("#stock-dialog")!;const colorsSection=document.querySelector<HTMLElement>(".colors")!;let selected="0001";
+const updateLink=()=>{const size=(document.querySelector("#selected-size") as any).value;const qty=(document.querySelector("#selected-qty") as any).value;const link=document.querySelector("#estimate-link") as any;link.href=`/estimate?sku=5001-01&color=${selected}&size=${size}&qty=${qty}`};
+document.querySelectorAll<HTMLButtonElement>(".color").forEach(btn=>btn.addEventListener("click",async()=>{selected=btn.dataset.code!;document.querySelectorAll(".color").forEach(x=>x.classList.remove("selected"));btn.classList.add("selected");(document.querySelector<HTMLImageElement>("#main-product-image")!).src=`/cropri/5001-images/view/${selected}.jpg`;stockData ||= await fetch("/cropri/stock-5001.json").then(r=>r.json());(document.querySelector("#stock-title")!).textContent=`${btn.dataset.name} / ${selected} の参考在庫`;(document.querySelector("#stock-list")!).innerHTML=Object.entries(stockData.stock[selected]||{}).map(([s,n])=>`<div><b>${s}</b><br>${Number(n).toLocaleString()}枚</div>`).join("");(document.querySelector("#stock-date")!).textContent=stockData.source_created_at;updateLink();dialog.showModal()}));
+document.querySelector("#close-stock")?.addEventListener("click",()=>dialog.close());document.querySelector("#selected-size")?.addEventListener("change",updateLink);document.querySelector("#selected-qty")?.addEventListener("input",updateLink);document.querySelector("#more-colors")?.addEventListener("click",e=>{colorsSection.classList.toggle("expanded");(e.currentTarget as HTMLButtonElement).textContent=colorsSection.classList.contains("expanded")?"閉じる":"カラーをもっと見る"});
+</script>
